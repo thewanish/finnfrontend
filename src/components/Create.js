@@ -42,7 +42,7 @@ const Create = () => {
 // på selve submit utløsning så lagres det med POST til collections
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8080/post", {
+    fetch("https://prosjekt-rekruttere.onrender.com/post", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",

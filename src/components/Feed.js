@@ -21,11 +21,11 @@ import {
     // den andre funksjonen henter alle posts
     useEffect(() => {
       const fetchPosts = async () => {
-        const response = await axios.get(`http://localhost:8080/posts/${query}`);
+        const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/posts/${query}`);
         setPost(response.data);
       };
       const fetchInitialPosts = async () => {
-          const response = await axios.get(`http://localhost:8080/allPosts`);
+          const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
           console.log(response);
           setPost(response.data);
       } //hvis søke feltet har 0 karakterer i feltet triggerer den 
