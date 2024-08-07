@@ -21,7 +21,7 @@ const Home = () => {
     useEffect(() => {
      
       const fetchInitialPosts = async () => {
-          const response = await axios.get(`http://localhost:8080/allPosts`);
+          const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
           console.log(response);
           setPost(response.data);
       }
