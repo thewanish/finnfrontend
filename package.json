@@ -1,9 +1,8 @@
 {
-  "homepage": "http://thewanish.github.io/finnfrontend",
+  "homepage": "https://rekrutterefront.onrender.com/",
   "name": "finnfrontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://rekrutterefront.onrender.com/",
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
