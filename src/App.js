@@ -8,7 +8,9 @@ import Navbar from './components/header/Navbar.js';
 
 // setter opp rekkefølgen i applikasjonen så det er enklere å navigere
 function App() {
+  
   return (
+    
     <BrowserRouter>
       <Navbar/>
       <Routes>
