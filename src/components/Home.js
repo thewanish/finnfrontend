@@ -21,10 +21,52 @@ const Home = () => {
     useEffect(() => {
      
       const fetchInitialPosts = async () => {
+        try {
           const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
-          console.log(response);
-          setPost(response.data);
-      }
+          
+          const newData = [
+            {
+              id: 999,
+              profile: "Freelance Utvikler",
+              desc: "Jobbet lenge med Javascript",
+              exp: 7,
+              techs: ["JavaScript", "Python", "Django"],
+            },
+            {
+              id: 991,
+              profile: " Utvikler",
+              desc: "Javascript guru",
+              exp: 11,
+              techs: ["JavaScript", "Java", "Django"],
+            },
+            {
+              id: 993,
+              profile: "SQL Utvikler",
+              desc: "2 års erfaring i SQL",
+              exp: 2,
+              techs: ["SQL", "Python", "Django"],
+            },
+            {
+              id: 992,
+              profile: "Database Utvikler",
+              desc: "4.5 års erfaring i SQL",
+              exp: 4,
+              techs: ["Oracle", "SQL", "Django"],
+            },
+            {
+              id: 1000,
+              profile: "Cloud Arkitekt",
+              desc: "3 års erfaring i AWS",
+              exp: 3,
+              techs: ["AWS", "SQL", "Java"],
+            },
+          ];
+      
+          setPost([...response.data, ...newData]); // Merge API data with static JSON data
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+        }
+      };
        fetchInitialPosts();
       
     }, );
