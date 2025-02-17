@@ -28,7 +28,7 @@ import {
         try {
           const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
           
-          const newData = [
+          const testData = [
             {
               id: 999,
               profile: "Freelance Developer",
@@ -66,7 +66,7 @@ import {
             },
           ];
       
-          setPost([...response.data, ...newData]); // Merge API data with static JSON data
+          setPost([...response.data, ...testData]); // Merge API data with static JSON data
         } catch (error) {
           console.error("Error fetching posts:", error);
         }
