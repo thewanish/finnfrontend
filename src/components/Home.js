@@ -15,60 +15,60 @@ import axios from "axios";
 
 const Home = () => {
   
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState([
+    {
+      id: 999,
+      profile: "Freelance Utvikler",
+      desc: "Jobbet lenge med Javascript",
+      exp: 7,
+      techs: ["JavaScript", "Python", "Django"],
+    },
+    {
+      id: 991,
+      profile: " Utvikler",
+      desc: "Javascript guru",
+      exp: 11,
+      techs: ["JavaScript", "Java", "Django"],
+    },
+    {
+      id: 993,
+      profile: "SQL Utvikler",
+      desc: "2 års erfaring i SQL",
+      exp: 2,
+      techs: ["SQL", "Python", "Django"],
+    },
+    {
+      id: 992,
+      profile: "Database Utvikler",
+      desc: "4.5 års erfaring i SQL",
+      exp: 4,
+      techs: ["Oracle", "SQL", "Django"],
+    },
+    {
+      id: 1000,
+      profile: "Cloud Arkitekt",
+      desc: "3 års erfaring i AWS",
+      exp: 3,
+      techs: ["AWS", "SQL", "Java"],
+    },
+  ]);
   
-    // bruker hook itilfelle dataene fra API endrer seg før den rendrer siden
-    useEffect(() => {
-     
-      const fetchInitialPosts = async () => {
-        try {
-          const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
-          
-          const testData = [
-            {
-              id: 999,
-              profile: "Freelance Utvikler",
-              desc: "Jobbet lenge med Javascript",
-              exp: 7,
-              techs: ["JavaScript", "Python", "Django"],
-            },
-            {
-              id: 991,
-              profile: " Utvikler",
-              desc: "Javascript guru",
-              exp: 11,
-              techs: ["JavaScript", "Java", "Django"],
-            },
-            {
-              id: 993,
-              profile: "SQL Utvikler",
-              desc: "2 års erfaring i SQL",
-              exp: 2,
-              techs: ["SQL", "Python", "Django"],
-            },
-            {
-              id: 992,
-              profile: "Database Utvikler",
-              desc: "4.5 års erfaring i SQL",
-              exp: 4,
-              techs: ["Oracle", "SQL", "Django"],
-            },
-            {
-              id: 1000,
-              profile: "Cloud Arkitekt",
-              desc: "3 års erfaring i AWS",
-              exp: 3,
-              techs: ["AWS", "SQL", "Java"],
-            },
-          ];
-      
-          setPost([...response.data, ...testData]); // Setter sammen API med statisk JSON data
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-        }
-      };
-       fetchInitialPosts();
-      }, []);
+  useEffect(() => {
+    const fetchInitialPosts = async () => {
+      try {
+        const response = await axios.get(
+          `https://prosjekt-rekruttere.onrender.com/allPosts`
+        );
+  
+        // Update state with API data when available
+        setPost((prevPosts) => [...response.data, ...prevPosts]); // Combining API data with existing data
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+  
+    fetchInitialPosts();
+  }, []);
 
       // **Calculate Dashboard Statistics**
       const totalJobs = post.length;
@@ -84,7 +84,7 @@ const Home = () => {
           <Grid container spacing={2} sx={{ marginBottom: "3%" }}>
             <Grid item xs={12} md={4}>
               <Card sx={{ padding: "2%", textAlign: "center", backgroundColor: "#f5f5f5" }}>
-                <Typography variant="h6">Aktive annonser</Typography>
+                <Typography variant="h6">Tilgjengelige annonser</Typography>
                 <Typography variant="h4">{totalJobs}</Typography>
               </Card>
             </Grid>

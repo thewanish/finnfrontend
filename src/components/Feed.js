@@ -14,59 +14,68 @@ import {
   
   const Feed = () => {
     const [query, setQuery] = useState("");
-    const [post, setPost] = useState();
+    
+    // fyller state med test data
+    const [post, setPost] = useState([
+      {
+        id: 999,
+        profile: "Freelance Developer",
+        desc: "Jobbet lenge med Javascript",
+        exp: 7,
+        techs: ["JavaScript", "Python", "Django"],
+      },
+      {
+        id: 991,
+        profile: "Utvikler",
+        desc: "Javascript guru",
+        exp: 11,
+        techs: ["JavaScript", "Java", "Django"],
+      },
+      {
+        id: 993,
+        profile: "SQL Utvikler",
+        desc: "2 års erfaring i SQL",
+        exp: 2,
+        techs: ["SQL", "Python", "Django"],
+      },
+      {
+        id: 992,
+        profile: "Database Utvikler",
+        desc: "4.5 års erfaring i SQL",
+        exp: 4,
+        techs: ["Oracle", "SQL", "Django"],
+      },
+      {
+        id: 1000,
+        profile: "Cloud Arkitekt",
+        desc: "3 års erfaring i AWS",
+        exp: 3,
+        techs: ["AWS", "SQL", "Java"],
+      },
+    ]);
   
-    // 2 funksjoner, en for søk der den brukersearch index i MongoDB som søker i selve databasen med {query}
-    // og filtrer for brukeren. 
-    // den andre funksjonen henter alle posts
+    // hent data fra API når søk query endrer seg
     useEffect(() => {
       const fetchPosts = async () => {
-        const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/posts/${query}`);
-        setPost(response.data);
+        try {
+          const response = await axios.get(
+            `https://prosjekt-rekruttere.onrender.com/posts/${query}`
+          );
+          setPost(response.data); // Update state with API search results
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+        }
       };
+      // 2 funksjoner, en for søk der den brukersearch index i MongoDB som søker i selve databasen med {query} 
+      // // og filtrer for brukeren. 
+      // // den andre funksjonen henter alle posts
       const fetchInitialPosts = async () => {
         try {
-          const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
-          
-          const testData = [
-            {
-              id: 999,
-              profile: "Freelance Developer",
-              desc: "Jobbet lenge med Javascript",
-              exp: 7,
-              techs: ["JavaScript", "Python", "Django"],
-            },
-            {
-              id: 991,
-              profile: " Utvikler",
-              desc: "Javascript guru",
-              exp: 11,
-              techs: ["JavaScript", "Java", "Django"],
-            },
-            {
-              id: 993,
-              profile: "SQL Utvikler",
-              desc: "2 års erfaring i SQL",
-              exp: 2,
-              techs: ["SQL", "Python", "Django"],
-            },
-            {
-              id: 992,
-              profile: "Database Utvikler",
-              desc: "4.5 års erfaring i SQL",
-              exp: 4,
-              techs: ["Oracle", "SQL", "Django"],
-            },
-            {
-              id: 1000,
-              profile: "Cloud Arkitekt",
-              desc: "3 års erfaring i AWS",
-              exp: 3,
-              techs: ["AWS", "SQL", "Java"],
-            },
-          ];
-      
-          setPost([...response.data, ...testData]); // Merge API data with static JSON data
+          const response = await axios.get(
+            `https://prosjekt-rekruttere.onrender.com/allPosts`
+          );
+          // Merge the API data with the static test data
+          setPost((prevPosts) => [...response.data, ...prevPosts]);
         } catch (error) {
           console.error("Error fetching posts:", error);
         }
