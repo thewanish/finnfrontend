@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import { FaBriefcase } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
+import { AiFillHome } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { NavbarInfo } from './NavbarInfo';
 import {NavLink} from "react-router-dom";
@@ -33,9 +36,9 @@ function Navbar() {
               <Link to="#" className='menu-bars'>
                   <FaIcons.FaBars onClick={viseSidebar} />
               </Link>
-              <NavLink className ="nav-link" to="/" style={lenkeStil} >Hjem</NavLink>
-              <NavLink className ="nav-link" to="/employer/create" style={lenkeStil} >Lag annonse</NavLink>
-              <NavLink className ="nav-link" to="/employee/feed" style={lenkeStil} >Filtrer jobber</NavLink>
+              <NavLink className ="nav-link" to="/" style={lenkeStil} ><AiFillHome />Hjem</NavLink>
+              <NavLink className ="nav-link" to="/employer/create" style={lenkeStil} ><FaCirclePlus /> Ny annonse</NavLink>
+              <NavLink className ="nav-link" to="/employee/feed" style={lenkeStil} > <FaBriefcase /> Søk jobber</NavLink>
               <NavLink className ="nav-link" to="/employee/feed" style={lenkeStil} >Shilwan</NavLink>
 
           </div>

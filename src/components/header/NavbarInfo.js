@@ -1,6 +1,9 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import { FaBriefcase } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
+import { AiFillHome } from "react-icons/ai";
 
 // dataene til navbar/navigasjonsbar
 export const NavbarInfo =  [
@@ -8,19 +11,19 @@ export const NavbarInfo =  [
   {
     title: 'Hjem',
     path: '/',
-    icon: <AiIcons.AiFillDashboard />,
+    icon: <AiFillHome />,
     cName: 'nav-text'
 },
 {
-    title: 'Lag annonse',
+    title: 'Ny annonse',
     path: '/employer/create',
-    icon: <FaIcons.FaUsers />,
+    icon: <FaCirclePlus />,
     cName: 'nav-text'
 },
 {
-    title: 'Filtrer jobber',
+    title: 'Søk jobber',
     path: '/employee/feed',
-    icon: <FaIcons.FaBuilding />,
+    icon: <FaBriefcase />,
     cName: 'nav-text'
 }
 

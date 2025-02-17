@@ -15,7 +15,7 @@ import axios from "axios";
 
 const Home = () => {
   
-    const [post, setPost] = useState();
+  const [post, setPost] = useState([]);
   
     // bruker hook itilfelle dataene fra API endrer seg før den rendrer siden
     useEffect(() => {
@@ -24,7 +24,7 @@ const Home = () => {
         try {
           const response = await axios.get(`https://prosjekt-rekruttere.onrender.com/allPosts`);
           
-          const newData = [
+          const testData = [
             {
               id: 999,
               profile: "Freelance Utvikler",
@@ -62,62 +62,73 @@ const Home = () => {
             },
           ];
       
-          setPost([...response.data, ...newData]); // Merge API data with static JSON data
+          setPost([...response.data, ...testData]); // Setter sammen API med statisk JSON data
         } catch (error) {
           console.error("Error fetching posts:", error);
         }
       };
        fetchInitialPosts();
-      
-    }, );
-  console.log(post);
-  return (
-    <div>
-      
-      <Typography sx={{ margin:"5%" }} variant="h3" align="center">
-        Ledige stillinger
-      </Typography>
-      <Grid container spacing={2} sx={{ margin: "2%" }}>
-        
-        {post &&
-        //viser alle postene i grid henter dem fra stillinger i colelctions
-          post.map((p) => {
-            return (
+      }, []);
+
+      // **Calculate Dashboard Statistics**
+      const totalJobs = post.length;
+      const avgExperience = totalJobs > 0 ? (post.reduce((sum, p) => sum + p.exp, 0) / totalJobs).toFixed(1) : 0;
+    
+      const allSkills = post.flatMap((p) => p.techs);
+      const uniqueSkills = [...new Set(allSkills)];
+      const topSkills = uniqueSkills.slice(0, 5).join(", "); // Topp 5 skillsett
+    
+      return (
+        <Box sx={{ margin: "2%" }}>
+          {/* Dashboard Widgets */}
+          <Grid container spacing={2} sx={{ marginBottom: "3%" }}>
+            <Grid item xs={12} md={4}>
+              <Card sx={{ padding: "2%", textAlign: "center", backgroundColor: "#f5f5f5" }}>
+                <Typography variant="h6">Aktive annonser</Typography>
+                <Typography variant="h4">{totalJobs}</Typography>
+              </Card>
+            </Grid>
+    
+            <Grid item xs={12} md={4}>
+              <Card sx={{ padding: "2%", textAlign: "center", backgroundColor: "#f5f5f5" }}>
+                <Typography variant="h6">Gjennomsnittlig erfaring</Typography>
+                <Typography variant="h4">{avgExperience} år</Typography>
+              </Card>
+            </Grid>
+    
+            <Grid item xs={12} md={4}>
+              <Card sx={{ padding: "3%", textAlign: "center", backgroundColor: "#f5f5f5" }}>
+                <Typography variant="h6">Topp teknologi</Typography>
+                <Typography variant="body1">{topSkills}</Typography>
+              </Card>
+            </Grid>
+          </Grid>
+    
+          {/* Section Title */}
+          <Typography sx={{ margin: "5%" }} variant="h3" align="center">
+            Anbefalinger til deg
+          </Typography>
+    
+          {/* Job Listings */}
+          <Grid container spacing={2} sx={{ margin: "2%" }}>
+            {post.map((p) => (
               <Grid key={p.id} item xs={12} md={6} lg={4}>
                 <Card sx={{ padding: "3%", overflow: "hidden", width: "84%" }}>
-                  <Typography
-                    variant="h5"
-                    sx={{ fontSize: "2rem", fontWeight: "600" }}
-                  >
-               {p.profile}
+                  <Typography variant="h5" sx={{ fontSize: "2rem", fontWeight: "600" }}>
+                    {p.profile}
                   </Typography>
-                  <Typography sx={{ color: "#585858", marginTop:"2%" }} variant="body" >
+                  <Typography sx={{ color: "#585858", marginTop: "2%" }}>
                     Beskrivelse: {p.desc}
                   </Typography>
-                  <br />
-                  <br />
-                  <Typography variant="h6">
-                    Erfaring: {p.exp} år
-                  </Typography>
-  
-                  <Typography gutterBottom  variant="body">Skills : </Typography>
-                  {p.techs.map((s, i) => {
-                    return (
-                      <Typography variant="body" gutterBottom key={i}>
-                        {s} .
-                        {` `}
-                      </Typography>
-                    );
-                  })}
-    
+                  <Typography variant="h6">Erfaring: {p.exp} år</Typography>
+                  <Typography gutterBottom>Skills: {p.techs.join(", ")}</Typography>
                 </Card>
               </Grid>
-            );
-          })}
-      </Grid>
-      
-    </div>
-  );
-};
-
-export default Home;
+            ))}
+          </Grid>
+        </Box>
+      );
+    };
+    
+    export default Home;
+    
