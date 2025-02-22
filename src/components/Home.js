@@ -84,7 +84,7 @@ const Home = () => {
           <Grid container spacing={2} sx={{ marginBottom: "3%" }}>
             <Grid item xs={12} md={4}>
               <Card sx={{ padding: "2%", textAlign: "center", backgroundColor: "#f5f5f5" }}>
-                <Typography variant="h6">Tilgjengelige annonser</Typography>
+                <Typography variant="h6">Aktive annonser</Typography>
                 <Typography variant="h4">{totalJobs}</Typography>
               </Card>
             </Grid>
