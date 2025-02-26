@@ -30,6 +30,13 @@
   font-size: 2rem;
   background: none;
   color: white;
+  cursor: pointer; /* Indikerer at det er klikkbart */
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-bars:hover {
+  color: #3e3e9a; /* Endre farge ved hover */
+  transform: scale(1.1); /* Litt større ved hover */
 }
 
 /* Pop-out meny (side-meny når hamburger-ikonet er klikket) */
